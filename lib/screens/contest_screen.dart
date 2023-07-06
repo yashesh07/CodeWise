@@ -1,6 +1,7 @@
+import 'package:code_wise/models/contests_data.dart';
 import 'package:flutter/material.dart';
 
-import '../data manager/data_fetcher.dart';
+import '../models/data_fetcher.dart';
 import '../widgets/contest_tile.dart';
 
 class ContestScreen extends StatefulWidget {
@@ -11,85 +12,19 @@ class ContestScreen extends StatefulWidget {
 }
 
 class _ContestScreenState extends State<ContestScreen> {
+  Future<List<ContestTile>> fetchUpComingContestDetails() async {
+    ContestsData contestsData = ContestsData();
+    return contestsData.getUpComingContest();
+  }
 
-  late Future<Album> futureAlbum;
-  late Widget onGoingContest;
-  late Widget upComingContest;
+  Future<List<ContestTile>> fetchOnGoingContestDetails() async {
+    ContestsData contestsData = ContestsData();
+    return contestsData.getOnGoingContest();
+  }
 
   @override
   void initState() {
     super.initState();
-    futureAlbum = DataFetcher().fetchAlbum();
-    onGoingContest = Center(
-      child: FutureBuilder<Album>(
-        future: futureAlbum,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return ListView.builder(
-              shrinkWrap: true,
-              itemCount: 50,
-              itemBuilder: (context, index) {
-                return snapshot.data!.result[index].phase!='BEFORE' && snapshot.data!.result[index].phase!='FINISHED' ? ContestTile(
-                  id: snapshot.data!.result[index].id,
-                  name: snapshot.data!.result[index].name,
-                  type: snapshot.data!.result[index].type,
-                  phase: snapshot.data!.result[index].phase,
-                  frozen: snapshot.data!.result[index].frozen,
-                  durationSeconds: snapshot.data!.result[index].durationSeconds,
-                  startTimeSeconds: snapshot.data!.result[index].startTimeSeconds,
-                  relativeTimeSeconds: snapshot.data!.result[index].relativeTimeSeconds,
-                ):null;
-              },
-            );
-          } else if (snapshot.hasError) {
-            return const Text('error');
-            // return Text('${snapshot.error}');
-          }
-
-          // By default, show a loading spinner.
-          return const SizedBox(
-            width: 350,
-            height: 350,
-            child: Text('loading'),
-          );
-        },
-      ),
-    );
-    upComingContest = Expanded(
-      child: Center(
-        child: FutureBuilder<Album>(
-          future: futureAlbum,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return ListView.builder(
-                itemCount: 50,
-                itemBuilder: (context, index) {
-                  return snapshot.data!.result[index].phase=='BEFORE' ? ContestTile(
-                    id: snapshot.data!.result[index].id,
-                    name: snapshot.data!.result[index].name,
-                    type: snapshot.data!.result[index].type,
-                    phase: snapshot.data!.result[index].phase,
-                    frozen: snapshot.data!.result[index].frozen,
-                    durationSeconds: snapshot.data!.result[index].durationSeconds,
-                    startTimeSeconds: snapshot.data!.result[index].startTimeSeconds,
-                    relativeTimeSeconds: snapshot.data!.result[index].relativeTimeSeconds,
-                  ):null;
-                },
-              );
-            } else if (snapshot.hasError) {
-              return const Text('error');
-              // return Text('${snapshot.error}');
-            }
-            // By default, show a loading spinner.
-            return const SizedBox(
-              width: 350,
-              height: 350,
-              child: Text('loading'),
-            );
-          },
-        ),
-      ),
-    );
   }
 
   @override
@@ -99,29 +34,71 @@ class _ContestScreenState extends State<ContestScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         // mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              color: Colors.grey,
-              child: const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text('Ongoing Contests'),
-              ),
+          const Card(
+            color: Colors.grey,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text('Ongoing Contests'),
             ),
           ),
-          onGoingContest,
-          const SizedBox(height: 4,),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              color: Colors.grey,
-              child: const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text('Upcoming Contests'),
-              ),
+          FutureBuilder<List<ContestTile>>(
+            future: fetchOnGoingContestDetails(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (snapshot.hasError) {
+                return const Center(
+                  child: Text('Error occurred while fetching contest details'),
+                );
+              } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                final contests = snapshot.data!;
+                return contests.length>=4 ? Expanded(
+                    child: SingleChildScrollView(
+                        child: Column(children: contests))) : Column(children: contests);
+              } else {
+                // If no data is available, display a message indicating no contests found
+                return const Center(
+                  child: Text('No contests found'),
+                );
+              }
+            },
+          ),
+          const SizedBox(
+            height: 4,
+          ),
+          const Card(
+            color: Colors.grey,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text('Upcoming Contests'),
             ),
           ),
-          upComingContest,
+          FutureBuilder<List<ContestTile>>(
+            future: fetchUpComingContestDetails(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (snapshot.hasError) {
+                return const Center(
+                  child: Text('Error occurred while fetching contest details'),
+                );
+              } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                final contests = snapshot.data!;
+                return Expanded(
+                    child: SingleChildScrollView(
+                        child: Column(children: contests)));
+              } else {
+                // If no data is available, display a message indicating no contests found
+                return const Center(
+                  child: Text('No contests found'),
+                );
+              }
+            },
+          ),
         ],
       ),
     );

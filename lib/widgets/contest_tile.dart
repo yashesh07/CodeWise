@@ -1,3 +1,4 @@
+import 'package:code_wise/models/contests_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -12,8 +13,9 @@ class ContestTile extends StatefulWidget {
   final int durationSeconds;
   final int startTimeSeconds;
   final int relativeTimeSeconds;
+  bool setAlarm = false;
 
-  const ContestTile({
+  ContestTile({super.key,
     required this.id,
     required this.name,
     required this.type,
@@ -22,6 +24,7 @@ class ContestTile extends StatefulWidget {
     required this.durationSeconds,
     required this.startTimeSeconds,
     required this.relativeTimeSeconds,
+    se
   });
 
   @override
@@ -30,12 +33,16 @@ class ContestTile extends StatefulWidget {
 
 class _ContestTileState extends State<ContestTile> {
 
-  bool setAlaram = false;
-
   void triggerClock(){
     setState(() {
-      setAlaram = !setAlaram;
+      widget.setAlarm = !widget.setAlarm;
     });
+    if(widget.setAlarm){
+      ContestsData.activeAlarm.add(widget.id);
+    }
+    else{
+      ContestsData.activeAlarm.remove(widget.id);
+    }
   }
 
   String getDateTime(int time){
@@ -58,10 +65,10 @@ class _ContestTileState extends State<ContestTile> {
         ),
         trailing: TextButton(
           onPressed: triggerClock,
-          child: const SizedBox(
+          child: SizedBox(
             height: 50,
             width: 50,
-            child: Center(child: Text('Set Reminder')),
+            child: widget.phase=="BEFORE" ? Center(child: widget.setAlarm ? Icon(Icons.alarm_on, color: Colors.greenAccent,) : Icon(Icons.alarm)):null,
           ),
         ),
         isThreeLine: true,

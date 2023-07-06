@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Container(
                     height: 70,
                     decoration: BoxDecoration(
-                        color: Colors.transparent.withOpacity(0.01)),
+                        color: Colors.red.withOpacity(0.01)),
                     child: RotatedBox(
                       quarterTurns: -1,
                       child: ListWheelScrollView.useDelegate(
