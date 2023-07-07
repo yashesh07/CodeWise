@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Column(children: [
                                   Icon(
                                     icons[newIndex],
-                                    color: Colors.pink
+                                    color: Colors.blue.shade700
                                         .withOpacity(_currentIndex == newIndex
                                             ? 1
                                             : 0.25),

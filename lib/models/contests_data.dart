@@ -1,5 +1,4 @@
 import 'package:code_wise/models/data_fetcher.dart';
-import 'package:flutter/cupertino.dart';
 
 import '../widgets/contest_tile.dart';
 
