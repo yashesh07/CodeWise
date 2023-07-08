@@ -1,0 +1,190 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.code_wise"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="19"
+9        android:targetSdkVersion="33" />
+10    <!--
+11         The INTERNET permission is required for development. Specifically,
+12         the Flutter tool needs it to communicate with the running application
+13         to allow setting breakpoints, to provide hot reload, etc.
+14    -->
+15    <uses-permission android:name="android.permission.INTERNET" />
+15-->D:\Flutter\code_wise\android\app\src\debug\AndroidManifest.xml:6:5-66
+15-->D:\Flutter\code_wise\android\app\src\debug\AndroidManifest.xml:6:22-64
+16    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+16-->D:\Flutter\code_wise\android\app\src\main\AndroidManifest.xml:2:5-80
+16-->D:\Flutter\code_wise\android\app\src\main\AndroidManifest.xml:2:22-78
+17    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- For apps with targetSDK=31 (Android 12) -->
+17-->D:\Flutter\code_wise\android\app\src\main\AndroidManifest.xml:3:5-67
+17-->D:\Flutter\code_wise\android\app\src\main\AndroidManifest.xml:3:22-65
+18    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+18-->D:\Flutter\code_wise\android\app\src\main\AndroidManifest.xml:5:5-78
+18-->D:\Flutter\code_wise\android\app\src\main\AndroidManifest.xml:5:22-76
+19    <uses-permission android:name="android.permission.VIBRATE" />
+19-->[:alarm] D:\Flutter\code_wise\build\alarm\intermediates\merged_manifest\debug\AndroidManifest.xml:11:5-66
+19-->[:alarm] D:\Flutter\code_wise\build\alarm\intermediates\merged_manifest\debug\AndroidManifest.xml:11:22-63
+20    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+20-->[:flutter_local_notifications] D:\Flutter\code_wise\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:11:5-81
+20-->[:flutter_local_notifications] D:\Flutter\code_wise\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:11:22-78
+21    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+21-->[:flutter_local_notifications] D:\Flutter\code_wise\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:13:5-77
+21-->[:flutter_local_notifications] D:\Flutter\code_wise\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:13:22-74
+22    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+22-->[com.google.android.exoplayer:exoplayer-core:2.18.7] C:\Users\yashe\.gradle\caches\transforms-3\e255c6ce9910a673f2619b479a7d74a8\transformed\jetified-exoplayer-core-2.18.7\AndroidManifest.xml:24:5-79
+22-->[com.google.android.exoplayer:exoplayer-core:2.18.7] C:\Users\yashe\.gradle\caches\transforms-3\e255c6ce9910a673f2619b479a7d74a8\transformed\jetified-exoplayer-core-2.18.7\AndroidManifest.xml:24:22-76
+23
+24    <queries>
+24-->[androidx.media2:media2-session:1.2.1] C:\Users\yashe\.gradle\caches\transforms-3\1c11fcd5d741b7583794ec56efdeaa69\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:24:5-34:15
+25        <intent>
+25-->[androidx.media2:media2-session:1.2.1] C:\Users\yashe\.gradle\caches\transforms-3\1c11fcd5d741b7583794ec56efdeaa69\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:25:9-27:18
+26            <action android:name="android.media.browse.MediaBrowserService" />
+26-->[androidx.media2:media2-session:1.2.1] C:\Users\yashe\.gradle\caches\transforms-3\1c11fcd5d741b7583794ec56efdeaa69\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:26:13-79
+26-->[androidx.media2:media2-session:1.2.1] C:\Users\yashe\.gradle\caches\transforms-3\1c11fcd5d741b7583794ec56efdeaa69\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:26:21-76
+27        </intent>
+28        <intent>
+28-->[androidx.media2:media2-session:1.2.1] C:\Users\yashe\.gradle\caches\transforms-3\1c11fcd5d741b7583794ec56efdeaa69\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:28:9-30:18
+29            <action android:name="androidx.media2.session.MediaSessionService" />
+29-->[androidx.media2:media2-session:1.2.1] C:\Users\yashe\.gradle\caches\transforms-3\1c11fcd5d741b7583794ec56efdeaa69\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:29:13-82
+29-->[androidx.media2:media2-session:1.2.1] C:\Users\yashe\.gradle\caches\transforms-3\1c11fcd5d741b7583794ec56efdeaa69\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:29:21-79
+30        </intent>
+31        <intent>
+31-->[androidx.media2:media2-session:1.2.1] C:\Users\yashe\.gradle\caches\transforms-3\1c11fcd5d741b7583794ec56efdeaa69\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:31:9-33:18
+32            <action android:name="androidx.media2.session.MediaLibraryService" />
+32-->[androidx.media2:media2-session:1.2.1] C:\Users\yashe\.gradle\caches\transforms-3\1c11fcd5d741b7583794ec56efdeaa69\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:32:13-82
+32-->[androidx.media2:media2-session:1.2.1] C:\Users\yashe\.gradle\caches\transforms-3\1c11fcd5d741b7583794ec56efdeaa69\transformed\jetified-media2-session-1.2.1\AndroidManifest.xml:32:21-79
+33        </intent>
+34    </queries>
+35
+36    <application
+37        android:name="android.app.Application"
+38        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+38-->[androidx.core:core:1.7.0] C:\Users\yashe\.gradle\caches\transforms-3\57d13c65eae90a7945dea98c1aa2b720\transformed\core-1.7.0\AndroidManifest.xml:24:18-86
+39        android:debuggable="true"
+40        android:icon="@mipmap/ic_launcher"
+41        android:label="CodeWise" >
+42        <service
+43            android:name="dev.fluttercommunity.plus.androidalarmmanager.AlarmService"
+44            android:exported="false"
+45            android:permission="android.permission.BIND_JOB_SERVICE" />
+46
+47        <receiver
+48            android:name="dev.fluttercommunity.plus.androidalarmmanager.AlarmBroadcastReceiver"
+49            android:exported="false" />
+50        <receiver
+51            android:name="dev.fluttercommunity.plus.androidalarmmanager.RebootBroadcastReceiver"
+52            android:enabled="false"
+53            android:exported="false" >
+54            <intent-filter>
+55                <action android:name="android.intent.action.BOOT_COMPLETED" />
+55-->[:flutter_local_notifications] D:\Flutter\code_wise\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:26:17-79
+55-->[:flutter_local_notifications] D:\Flutter\code_wise\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:26:25-76
+56            </intent-filter>
+57        </receiver>
+58
+59        <activity
+60            android:name="com.example.code_wise.MainActivity"
+61            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+62            android:exported="true"
+63            android:hardwareAccelerated="true"
+64            android:launchMode="singleTop"
+65            android:theme="@style/LaunchTheme"
+66            android:windowSoftInputMode="adjustResize" >
+67
+68            <!--
+69                 Specifies an Android theme to apply to this Activity as soon as
+70                 the Android process has started. This theme is visible to the user
+71                 while the Flutter UI initializes. After that, this theme continues
+72                 to determine the Window background behind the Flutter UI.
+73            -->
+74            <meta-data
+75                android:name="io.flutter.embedding.android.NormalTheme"
+76                android:resource="@style/NormalTheme" />
+77
+78            <intent-filter>
+79                <action android:name="android.intent.action.MAIN" />
+80
+81                <category android:name="android.intent.category.LAUNCHER" />
+82            </intent-filter>
+83        </activity>
+84        <!--
+85             Don't delete the meta-data below.
+86             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+87        -->
+88        <meta-data
+89            android:name="flutterEmbedding"
+90            android:value="2" />
+91
+92        <service
+92-->[:alarm] D:\Flutter\code_wise\build\alarm\intermediates\merged_manifest\debug\AndroidManifest.xml:16:9-19:40
+93            android:name="com.gdelataillade.alarm.alarm.NotificationOnKillService"
+93-->[:alarm] D:\Flutter\code_wise\build\alarm\intermediates\merged_manifest\debug\AndroidManifest.xml:17:13-83
+94            android:enabled="true"
+94-->[:alarm] D:\Flutter\code_wise\build\alarm\intermediates\merged_manifest\debug\AndroidManifest.xml:18:13-35
+95            android:exported="false" />
+95-->[:alarm] D:\Flutter\code_wise\build\alarm\intermediates\merged_manifest\debug\AndroidManifest.xml:19:13-37
+96
+97        <receiver
+97-->[:flutter_local_notifications] D:\Flutter\code_wise\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:16:9-18:40
+98            android:name="com.dexterous.flutterlocalnotifications.ActionBroadcastReceiver"
+98-->[:flutter_local_notifications] D:\Flutter\code_wise\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:17:13-91
+99            android:exported="false" />
+99-->[:flutter_local_notifications] D:\Flutter\code_wise\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:18:13-37
+100        <receiver
+100-->[:flutter_local_notifications] D:\Flutter\code_wise\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:19:9-21:40
+101            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver"
+101-->[:flutter_local_notifications] D:\Flutter\code_wise\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:20:13-97
+102            android:exported="false" />
+102-->[:flutter_local_notifications] D:\Flutter\code_wise\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:21:13-37
+103        <receiver
+103-->[:flutter_local_notifications] D:\Flutter\code_wise\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:22:9-31:20
+104            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver"
+104-->[:flutter_local_notifications] D:\Flutter\code_wise\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:23:13-101
+105            android:exported="false" >
+105-->[:flutter_local_notifications] D:\Flutter\code_wise\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:24:13-37
+106            <intent-filter>
+106-->[:flutter_local_notifications] D:\Flutter\code_wise\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:25:13-30:29
+107                <action android:name="android.intent.action.BOOT_COMPLETED" />
+107-->[:flutter_local_notifications] D:\Flutter\code_wise\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:26:17-79
+107-->[:flutter_local_notifications] D:\Flutter\code_wise\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:26:25-76
+108                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+108-->[:flutter_local_notifications] D:\Flutter\code_wise\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:27:17-84
+108-->[:flutter_local_notifications] D:\Flutter\code_wise\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:27:25-81
+109                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+109-->[:flutter_local_notifications] D:\Flutter\code_wise\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:28:17-82
+109-->[:flutter_local_notifications] D:\Flutter\code_wise\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:28:25-79
+110                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+110-->[:flutter_local_notifications] D:\Flutter\code_wise\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:29:17-82
+110-->[:flutter_local_notifications] D:\Flutter\code_wise\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:29:25-79
+111            </intent-filter>
+112        </receiver>
+113
+114        <uses-library
+114-->[androidx.window:window:1.0.0-beta04] C:\Users\yashe\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
+115            android:name="androidx.window.extensions"
+115-->[androidx.window:window:1.0.0-beta04] C:\Users\yashe\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
+116            android:required="false" />
+116-->[androidx.window:window:1.0.0-beta04] C:\Users\yashe\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
+117        <uses-library
+117-->[androidx.window:window:1.0.0-beta04] C:\Users\yashe\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
+118            android:name="androidx.window.sidecar"
+118-->[androidx.window:window:1.0.0-beta04] C:\Users\yashe\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
+119            android:required="false" />
+119-->[androidx.window:window:1.0.0-beta04] C:\Users\yashe\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
+120
+121        <provider
+121-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\yashe\.gradle\caches\transforms-3\7d7fafe6351e6ce14bb67797ad51335e\transformed\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:25:9-29:43
+122            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+122-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\yashe\.gradle\caches\transforms-3\7d7fafe6351e6ce14bb67797ad51335e\transformed\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:26:13-79
+123            android:authorities="com.example.code_wise.lifecycle-process"
+123-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\yashe\.gradle\caches\transforms-3\7d7fafe6351e6ce14bb67797ad51335e\transformed\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:27:13-69
+124            android:exported="false"
+124-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\yashe\.gradle\caches\transforms-3\7d7fafe6351e6ce14bb67797ad51335e\transformed\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:28:13-37
+125            android:multiprocess="true" />
+125-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\yashe\.gradle\caches\transforms-3\7d7fafe6351e6ce14bb67797ad51335e\transformed\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:29:13-40
+126    </application>
+127
+128</manifest>

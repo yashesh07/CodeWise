@@ -1,7 +1,10 @@
+import 'package:code_wise/alarm%20manager/alarm_manager.dart';
 import 'package:code_wise/models/contests_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+import '../alarm manager/alarm_loader.dart';
 
 class ContestTile extends StatefulWidget {
 
@@ -14,6 +17,8 @@ class ContestTile extends StatefulWidget {
   final int startTimeSeconds;
   final int relativeTimeSeconds;
   bool setAlarm = false;
+
+  late AlarmManager am;
 
   ContestTile({super.key,
     required this.id,
@@ -33,15 +38,27 @@ class ContestTile extends StatefulWidget {
 
 class _ContestTileState extends State<ContestTile> {
 
+  @override
+  void initState() {
+    super.initState();
+    widget.am = AlarmManager(alarmTime: widget.startTimeSeconds, id: widget.id);
+  }
+
   void triggerClock(){
     setState(() {
       widget.setAlarm = !widget.setAlarm;
     });
     if(widget.setAlarm){
       ContestsData.activeAlarm.add(widget.id);
+      widget.am.saveAlarm();
+      AlarmLoader al = AlarmLoader();
+      al.initiateAlarmLoader(context);
     }
     else{
       ContestsData.activeAlarm.remove(widget.id);
+      widget.am.deleteAlarm();
+      AlarmLoader al = AlarmLoader();
+      al.initiateAlarmLoader(context);
     }
   }
 

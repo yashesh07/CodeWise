@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:code_wise/alarm%20manager/alarm_loader.dart';
 import 'package:code_wise/screens/analysis_screen.dart';
 import 'package:code_wise/screens/contest_screen.dart';
 import 'package:code_wise/screens/profile_screen.dart';
@@ -29,6 +30,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int _currentIndex = 0;
   int numberOfPages = 3;
+
+  @override
+  void initState() {
+    super.initState();
+    AlarmLoader al = AlarmLoader();
+    al.initiateAlarmLoader(context);
+  }
 
   @override
   Widget build(BuildContext context) {
