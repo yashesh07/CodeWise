@@ -1,5 +1,5 @@
+import 'package:alarm/model/alarm_settings.dart';
 import 'package:code_wise/alarm%20manager/alarm_manager.dart';
-import 'package:code_wise/models/contests_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -29,7 +29,6 @@ class ContestTile extends StatefulWidget {
     required this.durationSeconds,
     required this.startTimeSeconds,
     required this.relativeTimeSeconds,
-    se
   });
 
   @override
@@ -41,7 +40,7 @@ class _ContestTileState extends State<ContestTile> {
   @override
   void initState() {
     super.initState();
-    widget.am = AlarmManager(alarmTime: widget.startTimeSeconds, id: widget.id);
+    widget.am = AlarmManager();
   }
 
   void triggerClock(){
@@ -49,14 +48,26 @@ class _ContestTileState extends State<ContestTile> {
       widget.setAlarm = !widget.setAlarm;
     });
     if(widget.setAlarm){
-      ContestsData.activeAlarm.add(widget.id);
-      widget.am.saveAlarm();
+      DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(widget.startTimeSeconds*1000);
+      dateTime = dateTime.subtract(const Duration(minutes: 15));
+      // DateTime dateTime = DateTime.now();
+      // dateTime = dateTime.add(const Duration(minutes: 3));
+      AlarmSettings alarmSettings = AlarmSettings(
+        id: widget.id,
+        dateTime: dateTime,
+        loopAudio: true,
+        vibrate: true,
+        notificationTitle: 'Codeforces contest reminder',
+        notificationBody: 'Content name (${widget.id}) is going to start',
+        assetAudioPath: 'assets/marimba.mp3',
+        stopOnNotificationOpen: false,
+      );
+      widget.am.saveAlarm(alarmSettings);
       AlarmLoader al = AlarmLoader();
       al.initiateAlarmLoader(context);
     }
     else{
-      ContestsData.activeAlarm.remove(widget.id);
-      widget.am.deleteAlarm();
+      widget.am.deleteAlarm(widget.id);
       AlarmLoader al = AlarmLoader();
       al.initiateAlarmLoader(context);
     }

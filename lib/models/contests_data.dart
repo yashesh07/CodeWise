@@ -1,3 +1,5 @@
+import 'package:alarm/model/alarm_settings.dart';
+import 'package:code_wise/alarm%20manager/alarm_loader.dart';
 import 'package:code_wise/models/data_fetcher.dart';
 
 import '../widgets/contest_tile.dart';
@@ -6,17 +8,14 @@ class ContestsData{
 
   List<ContestTile> upComingContest = [];
   List<ContestTile> onGoingContest = [];
-  static var activeAlarm = <int>[];
 
  Future<bool> updateData() async {
     DataFetcher df = DataFetcher('https://codeforces.com/api/contest.list?gym=false');
     final data = await df.fetchAlbum();
     print(data['result'][0]);
     if(data['status']=='OK'){
-      var temp = <int>[];
       for(int i = 0; i<15; i++){
         if(data['result'][i]['phase']=="BEFORE"){
-          if(activeAlarm.contains(data['result'][i]['id'])) temp.add(data['result'][i]['id']);
           upComingContest.add(ContestTile(
               id: data['result'][i]['id'],
               name: data['result'][i]['name'],
@@ -51,7 +50,12 @@ class ContestsData{
         upComingContest[i] = upComingContest[upComingContest.length-1-i];
         upComingContest[upComingContest.length-1-i] = t;
       }
-      activeAlarm = temp;
+      var activeAlarm = <int>[];
+      AlarmLoader al = AlarmLoader();
+      al.loadAlarms();
+      for(AlarmSettings alarm in al.alarms){
+        activeAlarm.add(alarm.id);
+      }
       for(int i = 0; i<upComingContest.length; i++){
         if(activeAlarm.contains(upComingContest[i].id)){
           upComingContest[i].setAlarm = true;
