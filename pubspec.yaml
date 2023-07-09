@@ -37,8 +37,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   font_awesome_flutter: ^10.5.0
   http: ^0.13.5
-  intl: ^0.17.0
+  intl: ^0.18.1
   alarm: ^1.1.5
+  syncfusion_flutter_charts: ^22.1.37
 
 dev_dependencies:
   flutter_test:
