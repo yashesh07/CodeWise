@@ -255,20 +255,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               fontSize: CustomFont.normaltext, color: CustomTheme.secondaryTextColor),
                                         ),
                                         Text(
-                                          '354',
-                                          style: TextStyle(fontSize: CustomFont.bodytext),
+                                          'coming soon',
+                                          style: TextStyle(fontSize: CustomFont.tag),
                                         ),
                                         const SizedBox(
                                           height: 10,
                                         ),
                                         Text(
-                                          'Problems Solved',
+                                          'Global Rank',
                                           style: TextStyle(
                                               fontSize: CustomFont.normaltext, color: CustomTheme.secondaryTextColor),
                                         ),
                                         Text(
-                                          '354',
-                                          style: TextStyle(fontSize: CustomFont.bodytext),
+                                          'coming soon',
+                                          style: TextStyle(fontSize: CustomFont.tag),
                                         ),
                                       ],
                                     ),
@@ -294,20 +294,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               fontSize: CustomFont.normaltext, color: CustomTheme.secondaryTextColor),
                                         ),
                                         Text(
-                                          '365',
-                                          style: TextStyle(fontSize: CustomFont.bodytext),
+                                          'coming soon',
+                                          style: TextStyle(fontSize: CustomFont.tag),
                                         ),
                                         const SizedBox(
                                           height: 10,
                                         ),
                                         Text(
-                                          'Problems Solved',
+                                          'Country Rank',
                                           style: TextStyle(
                                               fontSize: CustomFont.normaltext, color: CustomTheme.secondaryTextColor),
                                         ),
                                         Text(
-                                          '354',
-                                          style: TextStyle(fontSize: CustomFont.bodytext),
+                                          'coming soon',
+                                          style: TextStyle(fontSize: CustomFont.tag),
                                         ),
                                       ],
                                     ),
@@ -380,12 +380,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             MainAxisAlignment.start,
                                         children: [
                                           Icon(
-                                            Icons.code,
+                                            Icons.share_rounded,
                                             color: CustomTheme.accentColor(),
-                                            size: 50,
                                           ),
                                           Text(
-                                            'solve',
+                                            'share',
                                             style: TextStyle(
                                               fontSize: CustomFont.tag,
                                               color: CustomTheme.secondaryTextColor,
@@ -399,6 +398,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ),
                       ),
+                    ),
+                    Text(
+                      "(*\'Proble of the day\' feature will be available in coming days)",
+                      style:
+                      TextStyle(fontSize: 5, color: CustomTheme.warningColor),
                     ),
                     const SizedBox(
                       height: 75,

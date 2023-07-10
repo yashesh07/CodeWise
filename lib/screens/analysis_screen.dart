@@ -83,7 +83,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
                     } else if (snapshot.hasError) {
                       return const Center(
                         child: Text(
-                            'Error occurred while fetching contest details'),
+                            'Error occurred while fetching details. Check your connection and make sure your codeforces ID is correct.'),
                       );
                     } else if (snapshot.hasData && snapshot.data!) {
                       return SfCartesianChart(
@@ -121,7 +121,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
                     } else {
                       // If no data is available, display a message indicating no contests found
                       return const Center(
-                        child: Text('Some unknown error occured'),
+                        child: Text('Some unknown error occurred'),
                       );
                     }
                   },
@@ -143,7 +143,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
                     } else if (snapshot.hasError) {
                       return const Center(
                         child: Text(
-                            'Error occurred while fetching contest details'),
+                            'Error occurred while fetching details. Check your connection and make sure your codeforces ID is correct.'),
                       );
                     } else if (snapshot.hasData && snapshot.data!) {
                       return SfCartesianChart(
@@ -175,7 +175,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
                     } else {
                       // If no data is available, display a message indicating no contests found
                       return const Center(
-                        child: Text('Some unknown error occured'),
+                        child: Text('Some unknown error occurred'),
                       );
                     }
                   },
@@ -197,7 +197,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
                     } else if (snapshot.hasError) {
                       return const Center(
                         child: Text(
-                            'Error occurred while fetching contest details'),
+                            'Error occurred while fetching details. Check your connection and make sure your codeforces ID is correct.'),
                       );
                     } else if (snapshot.hasData && snapshot.data!) {
                       return SfCartesianChart(
@@ -232,7 +232,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
                     } else {
                       // If no data is available, display a message indicating no contests found
                       return const Center(
-                        child: Text('Some unknown error occured'),
+                        child: Text('Some unknown error occurred'),
                       );
                     }
                   },
@@ -254,7 +254,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
                     } else if (snapshot.hasError) {
                       return const Center(
                         child: Text(
-                            'Error occurred while fetching contest details'),
+                            'Error occurred while fetching details. Check your connection and make sure your codeforces ID is correct.'),
                       );
                     } else if (snapshot.hasData && snapshot.data!) {
                       return SfCircularChart(
@@ -285,7 +285,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
                     } else {
                       // If no data is available, display a message indicating no contests found
                       return const Center(
-                        child: Text('Some unknown error occured'),
+                        child: Text('Some unknown error occurred'),
                       );
                     }
                   },
@@ -307,7 +307,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
                     } else if (snapshot.hasError) {
                       return const Center(
                         child: Text(
-                            'Error occurred while fetching contest details'),
+                            'Error occurred while fetching details. Check your connection and make sure your codeforces ID is correct.'),
                       );
                     } else if (snapshot.hasData && snapshot.data!) {
                       return SfCircularChart(
@@ -337,7 +337,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
                     } else {
                       // If no data is available, display a message indicating no contests found
                       return const Center(
-                        child: Text('Some unknown error occured'),
+                        child: Text('Some unknown error occurred'),
                       );
                     }
                   },

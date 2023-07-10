@@ -1,5 +1,6 @@
 import 'package:alarm/alarm.dart';
 import 'package:code_wise/screens/home_screen.dart';
+import 'package:code_wise/screens/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         fontFamily: 'RobotoMono',
       ),
-      home: const HomeScreen(),
+      home: OnboardingScreen(),
     );
   }
 }
