@@ -1,4 +1,6 @@
 import 'package:alarm/model/alarm_settings.dart';
+import 'package:code_wise/Theme/colors.dart';
+import 'package:code_wise/Theme/font_size.dart';
 import 'package:code_wise/alarm%20manager/alarm_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -86,17 +88,19 @@ class _ContestTileState extends State<ContestTile> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: CustomTheme.thirdBackgroundColor,
       child: ListTile(
-        title: Text(widget.name),
+        title: Text(widget.name, style: TextStyle(fontSize: CustomFont.normaltext),),
         subtitle: Text(
-            'Start: ${getDateTime(widget.startTimeSeconds)}\nDuration: ${getDurationFormat(widget.durationSeconds)}'
+            'Start: ${getDateTime(widget.startTimeSeconds)}\nDuration: ${getDurationFormat(widget.durationSeconds)}',
+            style: TextStyle(fontSize: CustomFont.normaltext),
         ),
         trailing: TextButton(
           onPressed: triggerClock,
           child: SizedBox(
             height: 50,
             width: 50,
-            child: widget.phase=="BEFORE" ? Center(child: widget.setAlarm ? Icon(Icons.alarm_on, color: Colors.greenAccent,) : Icon(Icons.alarm)):null,
+            child: widget.phase=="BEFORE" ? Center(child: widget.setAlarm ? Icon(Icons.alarm_on, color: CustomTheme.successColor,) : Icon(Icons.alarm, color: CustomTheme.highlightColor,)):null,
           ),
         ),
         isThreeLine: true,

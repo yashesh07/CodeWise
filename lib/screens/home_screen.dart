@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:code_wise/Theme/colors.dart';
 import 'package:code_wise/alarm%20manager/alarm_loader.dart';
 import 'package:code_wise/screens/analysis_screen.dart';
 import 'package:code_wise/screens/contest_screen.dart';
@@ -41,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: CustomTheme.primaryBackgroundColor,
       body: Stack(
         children: [
           pages[_currentIndex],
@@ -54,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Container(
                     height: 70,
                     decoration: BoxDecoration(
-                        color: Colors.red.withOpacity(0.01)),
+                        color: CustomTheme.secondaryBackgroundColor),
                     child: RotatedBox(
                       quarterTurns: -1,
                       child: ListWheelScrollView.useDelegate(
@@ -78,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Column(children: [
                                   Icon(
                                     icons[newIndex],
-                                    color: Colors.blue.shade700
+                                    color: CustomTheme.accentColor()
                                         .withOpacity(_currentIndex == newIndex
                                             ? 1
                                             : 0.25),
@@ -89,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     style: TextStyle(
                                         fontSize:
                                             _currentIndex == newIndex ? 10 : 5),
-                                    child: Text(tabs[newIndex]),
+                                    child: Text(tabs[newIndex], style: TextStyle(fontFamily: 'RobotoMono'),),
                                   ),
                                 ]));
                           },

@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:code_wise/Theme/colors.dart';
+import 'package:code_wise/Theme/font_size.dart';
 import 'package:code_wise/models/user_data.dart';
 import 'package:flutter/material.dart';
 
@@ -42,62 +44,58 @@ class _ProfileScreenState extends State<ProfileScreen> {
           } else if (snapshot.hasData) {
             final user = snapshot.data!;
             return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SingleChildScrollView(
-                child: Column(
+              padding: EdgeInsets.all(8.0),
+              // Top Bar ---------------------------------------------------------------------
+              child: Column(
+                children: [
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-
-
-                    // Top Bar ---------------------------------------------------------------------
-
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CircleAvatar(
-                            backgroundImage: NetworkImage(user.titlePhoto),
-                          ),
-                          const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'CODE',
-                                style: TextStyle(fontSize: 25),
-                              ),
-                              Image(
-                                image: AssetImage('assets/codewise_logo.png'),
-                                height: 25,
-                                width: 25,
-                              ),
-                              Text(
-                                'WISE',
-                                style: TextStyle(fontSize: 25),
-                              ),
-                            ],
-                          ),
-                          TextButton(
-                              onPressed: () {},
-                              child: const Icon(Icons.settings_rounded))
-                        ],
-                      ),
+                    CircleAvatar(
+                      backgroundImage: NetworkImage(user.titlePhoto),
                     ),
-
-
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'CODE',
+                          style: TextStyle(fontSize: 25, fontFamily: 'PlayfairDisplaySC'),
+                        ),
+                        Image(
+                          image: AssetImage('assets/codewise_logo.png'),
+                          height: 25,
+                          width: 25,
+                        ),
+                        Text(
+                          'WISE',
+                          style: TextStyle(fontSize: 25, fontFamily: 'PlayfairDisplaySC'),
+                        ),
+                      ],
+                    ),
+                    TextButton(
+                        onPressed: () {},
+                        child: Icon(Icons.settings_rounded, color: CustomTheme.accentColor(),))
+                  ],
+                ),
+              ),
+              Expanded(
+                child: ListView(
+                  children: [
 
                     // Card 1 ---------------------------------------------------------------------
 
-
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.0),
                       child: Container(
                         decoration: BoxDecoration(
                             gradient: LinearGradient(
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
-                                Colors.blue.shade900,
-                                Colors.blueGrey,
+                                CustomTheme.accentColor(),
+                                CustomTheme.accentColor(),
                               ],
                             ),
                             borderRadius: const BorderRadius.all(
@@ -107,12 +105,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            const Padding(
+                            Padding(
                               padding: EdgeInsets.all(10.0),
                               child: Text(
                                 'Profile',
                                 style:
-                                    TextStyle(fontSize: 10, color: Colors.grey),
+                                    TextStyle(fontSize: CustomFont.tag, color: CustomTheme.secondaryTextColor),
                               ),
                             ),
                             Column(
@@ -127,28 +125,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        const Text(
+                                        Text(
                                           'Current Rating',
                                           style: TextStyle(
-                                              fontSize: 8, color: Colors.grey),
+                                              fontSize: CustomFont.normaltext, color: CustomTheme.secondaryTextColor),
                                         ),
                                         Text(
                                           '${user.rating}',
-                                          style: const TextStyle(fontSize: 20),
+                                          style: TextStyle(fontSize: CustomFont.bodytext),
                                         ),
                                         const SizedBox(
                                           height: 10,
                                         ),
-                                        const Text(
+                                        Text(
                                           'Current Status',
                                           style: TextStyle(
-                                              fontSize: 8, color: Colors.grey),
+                                              fontSize: CustomFont.normaltext, color: CustomTheme.secondaryTextColor),
                                         ),
                                         Text(
                                           getShortForm(user.rank),
                                           maxLines: 3,
                                           style:
-                                              const TextStyle(fontSize: 20),
+                                              TextStyle(fontSize: CustomFont.bodytext),
                                         ),
                                       ],
                                     ),
@@ -156,27 +154,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        const Text(
+                                        Text(
                                           'Max Rating',
                                           style: TextStyle(
-                                              fontSize: 8, color: Colors.grey),
+                                              fontSize: CustomFont.normaltext, color: CustomTheme.secondaryTextColor),
                                         ),
                                         Text(
                                           '${user.maxRating}',
-                                          style: const TextStyle(fontSize: 20),
+                                          style: TextStyle(fontSize: CustomFont.bodytext),
                                         ),
                                         const SizedBox(
                                           height: 10,
                                         ),
-                                        const Text(
+                                        Text(
                                           'Max Status',
                                           style: TextStyle(
-                                              fontSize: 8, color: Colors.grey),
+                                              fontSize: CustomFont.normaltext, color: CustomTheme.secondaryTextColor),
                                         ),
                                         Text(
                                           getShortForm(user.maxRank),
                                           style:
-                                              const TextStyle(fontSize: 20),
+                                              TextStyle(fontSize: CustomFont.bodytext),
                                         ),
                                       ],
                                     ),
@@ -186,7 +184,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   padding: const EdgeInsets.all(18.0),
                                   child: Text(
                                     user.handle,
-                                    style: const TextStyle(fontSize: 32),
+                                    style: TextStyle(fontSize: CustomFont.heading),
                                   ),
                                 )
                               ],
@@ -208,8 +206,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
-                                Colors.blue.shade900,
-                                Colors.blueGrey,
+                                CustomTheme.accentColor(),
+                                CustomTheme.accentColor(),
                               ],
                             ),
                             borderRadius: const BorderRadius.all(
@@ -219,12 +217,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            const Padding(
-                              padding: EdgeInsets.all(10.0),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
                               child: Text(
                                 'Stats',
                                 style:
-                                    TextStyle(fontSize: 10, color: Colors.grey),
+                                    TextStyle(fontSize: CustomFont.tag, color: CustomTheme.secondaryTextColor),
                               ),
                             ),
                             Column(
@@ -239,38 +237,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        const Text(
+                                        Text(
                                           'Contributions',
                                           style: TextStyle(
-                                              fontSize: 8, color: Colors.grey),
+                                              fontSize: CustomFont.normaltext, color: CustomTheme.secondaryTextColor),
                                         ),
                                         Text(
                                           '${user.contribution}',
-                                          style: const TextStyle(fontSize: 20),
+                                          style: TextStyle(fontSize: CustomFont.bodytext),
                                         ),
                                         const SizedBox(
                                           height: 10,
                                         ),
-                                        const Text(
+                                        Text(
                                           'Problems Solved',
                                           style: TextStyle(
-                                              fontSize: 8, color: Colors.grey),
+                                              fontSize: CustomFont.normaltext, color: CustomTheme.secondaryTextColor),
                                         ),
-                                        const Text(
+                                        Text(
                                           '354',
-                                          style: TextStyle(fontSize: 20),
+                                          style: TextStyle(fontSize: CustomFont.bodytext),
                                         ),
                                         const SizedBox(
                                           height: 10,
                                         ),
-                                        const Text(
+                                        Text(
                                           'Problems Solved',
                                           style: TextStyle(
-                                              fontSize: 8, color: Colors.grey),
+                                              fontSize: CustomFont.normaltext, color: CustomTheme.secondaryTextColor),
                                         ),
-                                        const Text(
+                                        Text(
                                           '354',
-                                          style: TextStyle(fontSize: 20),
+                                          style: TextStyle(fontSize: CustomFont.bodytext),
                                         ),
                                       ],
                                     ),
@@ -278,44 +276,44 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        const Text(
+                                        Text(
                                           'No of friends',
                                           style: TextStyle(
-                                              fontSize: 8, color: Colors.grey),
+                                              fontSize: CustomFont.normaltext, color: CustomTheme.secondaryTextColor),
                                         ),
                                         Text(
                                           '${user.friendsCount}',
-                                          style: const TextStyle(fontSize: 20),
+                                          style: TextStyle(fontSize: CustomFont.bodytext),
                                         ),
                                         const SizedBox(
                                           height: 10,
                                         ),
-                                        const Text(
+                                        Text(
                                           'Max Streak',
                                           style: TextStyle(
-                                              fontSize: 8, color: Colors.grey),
+                                              fontSize: CustomFont.normaltext, color: CustomTheme.secondaryTextColor),
                                         ),
-                                        const Text(
+                                        Text(
                                           '365',
-                                          style: TextStyle(fontSize: 20),
+                                          style: TextStyle(fontSize: CustomFont.bodytext),
                                         ),
                                         const SizedBox(
                                           height: 10,
                                         ),
-                                        const Text(
+                                        Text(
                                           'Problems Solved',
                                           style: TextStyle(
-                                              fontSize: 8, color: Colors.grey),
+                                              fontSize: CustomFont.normaltext, color: CustomTheme.secondaryTextColor),
                                         ),
-                                        const Text(
+                                        Text(
                                           '354',
-                                          style: TextStyle(fontSize: 20),
+                                          style: TextStyle(fontSize: CustomFont.bodytext),
                                         ),
                                       ],
                                     ),
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 20,
                                 )
                               ],
@@ -335,28 +333,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                           side: BorderSide(
-                            color: Colors.blue.shade900,
+                            color: CustomTheme.accentColor(),
                             width: 2,
                           ),
                         ),
                         elevation: 0,
                         clipBehavior: Clip.antiAliasWithSaveLayer,
                         child: Container(
+                          color: CustomTheme.secondaryBackgroundColor,
                           padding: const EdgeInsets.all(15),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: <Widget>[
-                              const Text(
+                              Text(
                                 "Problem of the day",
                                 style:
-                                    TextStyle(fontSize: 12, color: Colors.blue),
+                                    TextStyle(fontSize: CustomFont.tag, color: CustomTheme.secondaryTextColor),
                               ),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  const Column(
+                                  Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
@@ -364,32 +363,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       Text(
                                         "Cyclic Rotation",
                                         style: TextStyle(
-                                            fontSize: 24, color: Colors.white),
+                                            fontSize: CustomFont.subheading, color: Colors.white),
                                       ),
                                       SizedBox(height: 10),
                                       Text('Codeforces Global Round 20',
                                           style: TextStyle(
-                                              fontSize: 15,
+                                              fontSize: CustomFont.normaltext,
                                               color: Colors.white)),
                                       SizedBox(height: 10),
                                     ],
                                   ),
                                   TextButton(
                                       onPressed: () {},
-                                      child: const Column(
+                                      child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         children: [
                                           Icon(
                                             Icons.code,
-                                            color: Colors.blue,
+                                            color: CustomTheme.accentColor(),
                                             size: 50,
                                           ),
                                           Text(
                                             'solve',
                                             style: TextStyle(
-                                              fontSize: 10,
-                                              color: Colors.white54,
+                                              fontSize: CustomFont.tag,
+                                              color: CustomTheme.secondaryTextColor,
                                             ),
                                           )
                                         ],
@@ -401,9 +400,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                       ),
                     ),
+                    const SizedBox(
+                      height: 75,
+                    ),
                   ],
                 ),
               ),
+                ],
+              )
             );
           } else {
             // If no data is available, display a message indicating no contests found

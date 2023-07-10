@@ -1,3 +1,4 @@
+import 'package:code_wise/Theme/colors.dart';
 import 'package:code_wise/models/contests_data.dart';
 import 'package:flutter/material.dart';
 
@@ -34,9 +35,9 @@ class _ContestScreenState extends State<ContestScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         // mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const Card(
-            color: Colors.grey,
-            child: Padding(
+          Card(
+            color: CustomTheme.secondaryBackgroundColor,
+            child: const Padding(
               padding: EdgeInsets.all(8.0),
               child: Text('Ongoing Contests'),
             ),
@@ -68,9 +69,9 @@ class _ContestScreenState extends State<ContestScreen> {
           const SizedBox(
             height: 4,
           ),
-          const Card(
-            color: Colors.grey,
-            child: Padding(
+          Card(
+            color: CustomTheme.secondaryBackgroundColor,
+            child: const Padding(
               padding: EdgeInsets.all(8.0),
               child: Text('Upcoming Contests'),
             ),
