@@ -1,8 +1,6 @@
 import 'package:code_wise/Theme/colors.dart';
 import 'package:code_wise/models/contests_data.dart';
 import 'package:flutter/material.dart';
-
-import '../models/data_fetcher.dart';
 import '../widgets/contest_tile.dart';
 
 class ContestScreen extends StatefulWidget {
@@ -51,7 +49,7 @@ class _ContestScreenState extends State<ContestScreen> {
                 );
               } else if (snapshot.hasError) {
                 return const Center(
-                  child: Text('Error occurred while fetching contest details'),
+                  child: Text('Error occurred while fetching details. Check your connection and make sure your codeforces ID is correct.'),
                 );
               } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
                 final contests = snapshot.data!;
@@ -85,7 +83,7 @@ class _ContestScreenState extends State<ContestScreen> {
                 );
               } else if (snapshot.hasError) {
                 return const Center(
-                  child: Text('Error occurred while fetching contest details'),
+                  child: Text('Error occurred while fetching details. Check your connection and make sure your codeforces ID is correct.'),
                 );
               } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
                 final contests = snapshot.data!;

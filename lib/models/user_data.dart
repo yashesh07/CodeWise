@@ -8,11 +8,11 @@ class UserData {
     required this.cf_handle,
 });
 
-  Future<User?> getUser() async{
+  Future<CodeforcesUser?> getUser() async{
     DataFetcher df = DataFetcher('https://codeforces.com/api/user.info?handles=$cf_handle');
     final data = await df.fetchAlbum();
     if(data['status']=='OK'){
-       User user = User(
+       CodeforcesUser user = CodeforcesUser(
          contribution: data['result'][0]['contribution'],
          lastOnline: data['result'][0]['lastOnlineTimeSeconds'],
          rating: data['result'][0]['rating'],
@@ -33,7 +33,7 @@ class UserData {
   }
 }
 
-class User{
+class CodeforcesUser{
   final int contribution;
   final int lastOnline;
   final int rating;
@@ -45,7 +45,7 @@ class User{
   final String avatar;
   final int registrationTime;
   final String maxRank;
-  User({
+  CodeforcesUser({
     this.contribution = 0,
     this.lastOnline = 0,
     this.rating = 0,

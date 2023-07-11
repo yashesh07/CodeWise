@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:code_wise/Theme/colors.dart';
 import 'package:code_wise/screens/codeforces_handle_screen.dart';
 import 'package:code_wise/screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnboardingScreen extends StatefulWidget {
   @override
@@ -17,11 +19,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   bool _isLoading = false;
 
-  void _navigateToHomeScreen(BuildContext context) {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const CodeforcesHandle()),
-    );
+  void _navigateToHomeScreen(BuildContext context) async{
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      String uid = user.uid;
+      DocumentSnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore.instance.collection('users').doc(uid).get();
+      String? codeforcesHandle = snapshot.data()?['codeforcesHandle'];
+      if (codeforcesHandle != null) {
+        SharedPreferences preferences = await SharedPreferences.getInstance();
+        await preferences.setString('cf_handle', codeforcesHandle);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
+        );
+      }
+      else{
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const CodeforcesHandle()),
+        );
+      }
+    }
   }
 
   @override
@@ -91,12 +109,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
                       final User? user = userCredential.user;
                       // Handle signed-in user
+                      SharedPreferences preferences = await SharedPreferences.getInstance();
+                      await preferences.setBool('isLoggedIn', true);
                       _navigateToHomeScreen(context);
                     } else {
                       print('Failed');
                     }
                   } catch (e) {
-                    // Handle sign-in error
+
                     print(e);
                   }
                   setState(() {

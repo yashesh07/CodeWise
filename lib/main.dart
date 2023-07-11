@@ -1,17 +1,22 @@
 import 'package:alarm/alarm.dart';
+import 'package:code_wise/screens/home_screen.dart';
 import 'package:code_wise/screens/onboarding_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  bool isLoggedIn = preferences.getBool('isLoggedIn') ?? false;
   await Firebase.initializeApp();
   await Alarm.init();
-  runApp(const MyApp());
+  runApp(MyApp(isLoggedIn: isLoggedIn,));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool isLoggedIn;
+  const MyApp({super.key, required this.isLoggedIn});
 
   // This widget is the root of your application.
   @override
@@ -23,7 +28,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         fontFamily: 'RobotoMono',
       ),
-      home: OnboardingScreen(),
+      home: isLoggedIn ? HomeScreen() : OnboardingScreen(),
     );
   }
 }

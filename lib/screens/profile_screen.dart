@@ -3,7 +3,13 @@ import 'dart:ui';
 import 'package:code_wise/Theme/colors.dart';
 import 'package:code_wise/Theme/font_size.dart';
 import 'package:code_wise/models/user_data.dart';
+import 'package:code_wise/screens/onboarding_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'codeforces_handle_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -13,8 +19,10 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  Future<User?> fetchUserDetails() async {
-    UserData userData = UserData(cf_handle: 'yashesh_07');
+  Future<CodeforcesUser?> fetchUserDetails() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String cf_handle = preferences.getString('cf_handle') as String;
+    UserData userData = UserData(cf_handle: cf_handle);
     return userData.getUser();
   }
 
@@ -27,10 +35,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return s;
   }
 
+  bool _isLoading = false;
+  bool _isLoadingHandle = false;
+
+  void signOut() async {
+    _isLoading = true;
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => OnboardingScreen()),
+    );
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.setBool('isLoggedIn', false);
+    _isLoading = false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: FutureBuilder<User?>(
+      child: FutureBuilder<CodeforcesUser?>(
         future: fetchUserDetails(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -38,25 +61,59 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasError) {
-            return const Center(
-              child: Text('Error occurred while fetching user details'),
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Error occurred while fetching details. Check your connection and make sure your codeforces ID is correct.'),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: CustomTheme.thirdBackgroundColor,
+                    ),
+                    child: _isLoadingHandle ? const CircularProgressIndicator() : Text('Edit Handle', style: TextStyle(color: CustomTheme.textColor),),
+                    onPressed: () {
+                      setState(() {
+                        _isLoadingHandle = true;
+                      });
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => const CodeforcesHandle()),
+                      );
+                      setState(() {
+                        _isLoadingHandle = false;
+                      });
+                    },
+                  ),
+                ],
+              ),
             );
           } else if (snapshot.hasData) {
             final user = snapshot.data!;
             return Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               // Top Bar ---------------------------------------------------------------------
               child: Column(
                 children: [
               Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CircleAvatar(
-                      backgroundImage: NetworkImage(user.titlePhoto),
+                    TextButton(
+                      onPressed: (){
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => const CodeforcesHandle()),
+                        );
+                      },
+                      child: CircleAvatar(
+                        backgroundImage: NetworkImage(user.titlePhoto),
+                      ),
                     ),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
@@ -74,9 +131,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                       ],
                     ),
-                    TextButton(
-                        onPressed: () {},
-                        child: Icon(Icons.settings_rounded, color: CustomTheme.accentColor(),))
+                    _isLoading ? const CircularProgressIndicator() : TextButton(
+                        onPressed: () {
+                          signOut();
+                        },
+                        child: Icon(Icons.exit_to_app_rounded, color: CustomTheme.accentColor(),))
                   ],
                 ),
               ),
@@ -87,7 +146,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     // Card 1 ---------------------------------------------------------------------
 
                     Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Container(
                         decoration: BoxDecoration(
                             gradient: LinearGradient(
@@ -106,7 +165,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: EdgeInsets.all(10.0),
+                              padding: const EdgeInsets.all(10.0),
                               child: Text(
                                 'Profile',
                                 style:
@@ -359,18 +418,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      SizedBox(height: 10),
+                                      const SizedBox(height: 10),
                                       Text(
                                         "Cyclic Rotation",
                                         style: TextStyle(
                                             fontSize: CustomFont.subheading, color: Colors.white),
                                       ),
-                                      SizedBox(height: 10),
+                                      const SizedBox(height: 10),
                                       Text('Codeforces Global Round 20',
                                           style: TextStyle(
                                               fontSize: CustomFont.normaltext,
                                               color: Colors.white)),
-                                      SizedBox(height: 10),
+                                      const SizedBox(height: 10),
                                     ],
                                   ),
                                   TextButton(

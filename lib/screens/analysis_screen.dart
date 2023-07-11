@@ -1,7 +1,9 @@
 import 'package:code_wise/Theme/colors.dart';
 import 'package:code_wise/models/rating_data.dart';
 import 'package:code_wise/models/submissions_data.dart';
+import 'package:code_wise/screens/codeforces_handle_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../Theme/font_size.dart';
@@ -14,13 +16,18 @@ class AnalysisScreen extends StatefulWidget {
 }
 
 class _AnalysisScreenState extends State<AnalysisScreen> {
+
   Future<bool> fetchRatingDataPerContest() async {
-    RatingData rd = RatingData(cf_handle: 'yashesh_07');
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String cf_handle = preferences.getString('cf_handle') as String;
+    RatingData rd = RatingData(cf_handle: cf_handle);
     return rd.updateData();
   }
 
   Future<bool> fetchSubmissionsData() async {
-    SubmissionsData sd = SubmissionsData(cf_handle: 'yashesh_07');
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String cf_handle = preferences.getString('cf_handle') as String;
+    SubmissionsData sd = SubmissionsData(cf_handle: cf_handle);
     return sd.updateData();
   }
 
