@@ -53,14 +53,14 @@ class _ContestTileState extends State<ContestTile> {
       DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(widget.startTimeSeconds*1000);
       dateTime = dateTime.subtract(const Duration(minutes: 15));
       // DateTime dateTime = DateTime.now();
-      // dateTime = dateTime.add(const Duration(minutes: 3));
+      // dateTime = dateTime.add(const Duration(seconds: 5));
       AlarmSettings alarmSettings = AlarmSettings(
         id: widget.id,
         dateTime: dateTime,
         loopAudio: true,
         vibrate: true,
         notificationTitle: 'Codeforces contest reminder',
-        notificationBody: 'Content name (${widget.id}) is going to start',
+        notificationBody: 'Contest is going to start',
         assetAudioPath: 'assets/marimba.mp3',
         stopOnNotificationOpen: false,
       );
