@@ -40,6 +40,9 @@ dependencies:
   intl: ^0.18.1
   alarm: ^1.1.5
   syncfusion_flutter_charts: ^22.1.37
+  firebase_auth: ^4.6.3
+  google_sign_in: ^6.1.4
+  firebase_core: ^2.14.0
 
 dev_dependencies:
   flutter_test:

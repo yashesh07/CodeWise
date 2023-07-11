@@ -402,7 +402,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Text(
                       "(*\'Proble of the day\' feature will be available in coming days)",
                       style:
-                      TextStyle(fontSize: 5, color: CustomTheme.warningColor),
+                      TextStyle(fontSize: 5, color: CustomTheme.secondaryTextColor),
                     ),
                     const SizedBox(
                       height: 75,

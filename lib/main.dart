@@ -1,10 +1,11 @@
 import 'package:alarm/alarm.dart';
-import 'package:code_wise/screens/home_screen.dart';
 import 'package:code_wise/screens/onboarding_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await Alarm.init();
   runApp(const MyApp());
 }

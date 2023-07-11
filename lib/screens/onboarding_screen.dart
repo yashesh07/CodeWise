@@ -1,6 +1,9 @@
 import 'package:code_wise/Theme/colors.dart';
+import 'package:code_wise/screens/codeforces_handle_screen.dart';
 import 'package:code_wise/screens/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class OnboardingScreen extends StatefulWidget {
   @override
@@ -10,6 +13,16 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController(initialPage: 0);
   int _currentPage = 0;
+
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  bool _isLoading = false;
+
+  void _navigateToHomeScreen(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const CodeforcesHandle()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +40,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               },
               children: [
                 OnboardingPage(
-                  title: 'Codeforces Profile',                  description: 'View your Codeforces profile details.',
+                  title: 'Codeforces Profile',
+                  description: 'View your Codeforces profile details.',
                   image: 'assets/ob_profile.png',
                 ),
                 OnboardingPage(
@@ -53,24 +67,63 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             children: _buildPageIndicator(),
           ),
           const SizedBox(height: 20),
-          TextButton(
-            onPressed: () {
-              if (_currentPage < 3) {
-                _pageController.nextPage(
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.ease,
-                );
-              } else {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomeScreen()),
-                );
-              }
-            },
-            style: TextButton.styleFrom(
-              backgroundColor: CustomTheme.secondaryBackgroundColor
+          Padding(
+            padding: const EdgeInsets.only(left: 50, right: 50),
+            child: TextButton(
+              onPressed: () async{
+                if (_currentPage < 3) {
+                  _pageController.nextPage(
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.ease,
+                  );
+                } else {
+                  setState(() {
+                    _isLoading = true;
+                  });
+                  try {
+                    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+                    if (googleUser != null) {
+                      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+                      final OAuthCredential credential = GoogleAuthProvider.credential(
+                        accessToken: googleAuth.accessToken,
+                        idToken: googleAuth.idToken,
+                      );
+                      final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+                      final User? user = userCredential.user;
+                      // Handle signed-in user
+                      _navigateToHomeScreen(context);
+                    } else {
+                      print('Failed');
+                    }
+                  } catch (e) {
+                    // Handle sign-in error
+                    print(e);
+                  }
+                  setState(() {
+                    _isLoading = false;
+                  });
+                }
+              },
+              style: TextButton.styleFrom(
+                backgroundColor: CustomTheme.secondaryBackgroundColor
+              ),
+              child: _currentPage < 3 ? Text('Next', style: TextStyle(color: CustomTheme.textColor),):
+                  _isLoading ? const CircularProgressIndicator() :
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/google-logo.png',
+                    height: 20,
+                    width: 20,
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Text('Continue with Google', style: TextStyle(color: CustomTheme.textColor),)
+                ],
+              ),
             ),
-            child: Text(_currentPage < 3 ? 'Next' : 'Get Started', style: TextStyle(color: CustomTheme.textColor),),
           ),
           const SizedBox(height: 20),
         ],
@@ -115,7 +168,7 @@ class OnboardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 20, bottom: 20),
+      padding: const EdgeInsets.only(top: 20, bottom: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -124,24 +177,24 @@ class OnboardingPage extends StatelessWidget {
             image,
             fit: BoxFit.fill,
           ),
-          SizedBox(height: 40),
+          const SizedBox(height: 40),
           Padding(
             padding: const EdgeInsets.only(left: 20, right: 20),
             child: Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.only(left: 20, right: 20),
             child: Text(
               description,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 color: Colors.grey,
               ),

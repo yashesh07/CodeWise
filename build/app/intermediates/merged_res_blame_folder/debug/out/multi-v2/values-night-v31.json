@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.code_wise.app-mergeDebugResources-21:/values-night-v31/values-night-v31.xml",
+            "outputFile": "com.example.code_wise.app-mergeDebugResources-27:/values-night-v31/values-night-v31.xml",
             "map": [
                 {
                     "source": "D:\\Flutter\\code_wise\\android\\app\\src\\main\\res\\values-night-v31\\styles.xml",
